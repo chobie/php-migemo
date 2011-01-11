@@ -5,6 +5,10 @@ PHPAPI function_entry php_migemo_methods[] = {
 };
 
 PHP_MINIT_FUNCTION(migemo) {
+    zend_class_entry ce;
+    INIT_CLASS_ENTRY(ce, "Migemo", php_migemo_methods);
+    migemo_class_entry = zend_register_internal_class(&ce TSRMLS_CC);
+
     return SUCCESS;
 }
 
