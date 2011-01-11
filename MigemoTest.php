@@ -29,18 +29,25 @@ class MigemoTest extends \PHPUnit_Framework_TestCase{
     }
 
     /**
-     * @depends testMigemoClassExists
+     * @depends testQueryMethodExists
      */
     public function testQuery()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $migemo = new Migemo();
+        $this->assertEquals("(ﾁｮﾋﾞ|チョビ|ちょび|ｃｈｏｂｉ|chobi)",$migemo->query("chobi"));
+        unset($migemo);
     }
 
     /**
-     * @depends testMigemoClassExists
+     * @depends testQuery
      */
     public function testQueryCycle()
     {
-        $this->markTestIncomplete('This test has not been implemented yet.');
+        $migemo = new Migemo();
+        for($i = 0; $i < 30; $i++){
+            $this->assertEquals("(ﾁｮﾋﾞ|チョビ|ちょび|ｃｈｏｂｉ|chobi)",$migemo->query("chobi"));
+        }
+        unset($migemo);
+
     }
 }

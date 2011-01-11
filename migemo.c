@@ -1,6 +1,32 @@
 #include "php_migemo.h"
 
+
+ZEND_BEGIN_ARG_INFO_EX(arginfo_migemo_query, 0, 0, 1)
+    ZEND_ARG_INFO(0, query)
+ZEND_END_ARG_INFO()
+PHP_METHOD(migemo, query)
+{
+    migemo *m;
+    char *query;
+    int ret = 0;
+    int query_len = 0;
+    unsigned char *result;
+    if(zend_parse_parameters(ZEND_NUM_ARGS() TSRMLS_CC,
+        "s", &query, &query_len) == FAILURE){
+        return;
+    }
+
+    m =  migemo_open("/usr/local/share/migemo/utf-8/migemo-dict");
+    result = migemo_query(m, query);
+
+    RETVAL_STRING(result, 1);
+    migemo_release(m, result);
+    migemo_close(m);
+}
+
+
 PHPAPI function_entry php_migemo_methods[] = {
+    PHP_ME(migemo, query, arginfo_migemo_query, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
 };
 
