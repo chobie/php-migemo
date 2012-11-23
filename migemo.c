@@ -64,7 +64,7 @@ PHP_METHOD(migemo, __construct){
 }
 
 
-PHPAPI function_entry php_migemo_methods[] = {
+static zend_function_entry php_migemo_methods[] = {
     PHP_ME(migemo, __construct, NULL, ZEND_ACC_PUBLIC)
     PHP_ME(migemo, query, arginfo_migemo_query, ZEND_ACC_PUBLIC)
     {NULL, NULL, NULL}
@@ -81,7 +81,6 @@ PHP_MINIT_FUNCTION(migemo) {
 
 PHP_MINFO_FUNCTION(migemo)
 {
-    return SUCCESS;
 }
 
 zend_module_entry migemo_module_entry = {
